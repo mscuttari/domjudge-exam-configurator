@@ -13,11 +13,11 @@ python run.py db-config-file exam-config-file students.csv
   - `database`: name of the DOMJudge database
 ```json
 {
-        "user": "domjudge",
-        "password": "password",
-        "host": "localhost",
-        "port": 3306,
-        "database": "domjudge"
+  "user": "domjudge",
+  "password": "password",
+  "host": "localhost",
+  "port": 3306,
+  "database": "domjudge"
 }
 ```
 
@@ -25,7 +25,7 @@ python run.py db-config-file exam-config-file students.csv
   - `shortname`: the shortname that has been specified while creating the contest through the DOMJudge web interface
 ```json
 {
-        "shortname": "exam"
+  "shortname": "exam"
 }
 ```
 
