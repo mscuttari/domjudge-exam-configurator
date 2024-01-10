@@ -175,7 +175,7 @@ def domjudge_create_team(db, name, display_name, team_category_id):
 	cursor = db.cursor()
 
 	cursor.execute(
-		"INSERT INTO team(name, display_name, category_id) VALUES(?,?,?)",
+		"INSERT INTO team(name, display_name, categoryid) VALUES(?,?,?)",
 		(name, display_name, team_category_id))
 
 	team = DomjudgeTeam(cursor.lastrowid, name, display_name)
