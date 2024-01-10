@@ -236,8 +236,8 @@ def run(db_config, exam_config, students):
 
 			if domjudge_user == None:
 				# User doesn't exist.
-			    password = gen_random_password(12)
-			
+				password = gen_random_password(12)
+
 				domjudge_user = domjudge_create_user(
 					db, domjudge_username, password, student.name, student.email)
 
@@ -248,10 +248,10 @@ def run(db_config, exam_config, students):
 
 				if assign_new_password_to_existing_users == True:
 					# Set the new password.
-			        password = gen_random_password(12)
+					password = gen_random_password(12)
 					domjudge_set_user_password(db, domjudge_user.id, password)
 				else:
-				    password = "<unchanged>"
+					password = "<unchanged>"
 
 			# Get the Domjudge team, if already existing.
 			domjudge_team = domjudge_get_team(db, domjudge_username)
