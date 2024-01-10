@@ -60,7 +60,7 @@ def gen_random_password(n):
 
 def hash_password(password):
 	bytes = password.encode('utf-8')
-	salt = bcrypt.gensalt(prefix=b"2y")
+	salt = bcrypt.gensalt()
 	return bcrypt.hashpw(bytes, salt)
 
 def domjudge_get_role_id(db, role):
@@ -230,13 +230,14 @@ def run(db_config, exam_config, students):
 			print("----------------------------------------------")
 
 			domjudge_username = compose_domjudge_username(student)
-			password = gen_random_password(12)
 
 			# Get the Domjudge user, if already existing.
 			domjudge_user = domjudge_get_user(db, domjudge_username)
 
 			if domjudge_user == None:
 				# User doesn't exist.
+			    password = gen_random_password(12)
+			
 				domjudge_user = domjudge_create_user(
 					db, domjudge_username, password, student.name, student.email)
 
@@ -247,7 +248,10 @@ def run(db_config, exam_config, students):
 
 				if assign_new_password_to_existing_users == True:
 					# Set the new password.
+			        password = gen_random_password(12)
 					domjudge_set_user_password(db, domjudge_user.id, password)
+				else:
+				    password = "<unchanged>"
 
 			# Get the Domjudge team, if already existing.
 			domjudge_team = domjudge_get_team(db, domjudge_username)
