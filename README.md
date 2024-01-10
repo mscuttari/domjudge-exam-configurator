@@ -1,10 +1,28 @@
 # DOMJudge exam configurator
+## Dependencies
+Install the required OS dependencies.
+The procedure varies according to the package manager in use.
+```
+libmariadb-dev
+```
+
+Create a Python virtual environment and activate it:
+```shell
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install the required Python dependencies:
+```shell
+python3 -m pip install -r requirements.txt
+```
+
 ## Usage
 To add the students to an exam:
 ```shell
 python add_students.py db-config-file exam-config-file students.csv
 ```
-To download the solutions submitted by students:
+To download the solutions submitted by students for an exam:
 ```shell
 python download_exams.py db-config-file exam-config-file students.csv
 ```
@@ -31,7 +49,9 @@ python download_exams.py db-config-file exam-config-file students.csv
   - `shortname`: the shortname that has been specified while creating the contest through the DOMJudge web interface
 ```json
 {
-  "shortname": "exam"
+  "shortname": "exam",
+  "problem_shortnames": ["Shortname 1", "Shortname 2"],
+  "team_category"; "Team category name"
 }
 ```
 

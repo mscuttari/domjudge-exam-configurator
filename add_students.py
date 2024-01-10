@@ -49,7 +49,7 @@ def get_db_connection(db_config):
 		database = db_config["database"])
 
 def compose_domjudge_username(student):
-	return "polimi-" + student.person_code
+	return student.person_code + "-esami"
 
 def gen_random_password(n):
 	# Define the list of choices of characters.
@@ -75,6 +75,19 @@ def domjudge_get_role_id(db, role):
 		return roles[0][0]
 	else:
 		raise Exception("Multiple roles named " + role)
+
+def domjudge_get_team_category_id(db, name):
+	cursor = db.cursor()
+	cursor.execute("SELECT categoryid FROM team_category WHERE name=?", (name,))
+	roles = list(cursor)
+	cursor.close()
+
+	if len(roles) == 0:
+		raise Exception("Team category " + role + " not found")
+	elif len(roles) == 1:
+		return roles[0][0]
+	else:
+		raise Exception("Multiple team categories named " + role)
 
 def domjudge_get_contest_id(db, shortname):
 	cursor = db.cursor()
@@ -158,12 +171,12 @@ def domjudge_get_team(db, name):
 
 	return DomjudgeTeam(teams[0][0], teams[0][1], teams[0][2])
 
-def domjudge_create_team(db, name, display_name):
+def domjudge_create_team(db, name, display_name, team_category_id):
 	cursor = db.cursor()
 
 	cursor.execute(
-		"INSERT INTO team(name, display_name) VALUES(?,?)",
-		(name, display_name))
+		"INSERT INTO team(name, display_name, category_id) VALUES(?,?,?)",
+		(name, display_name, team_category_id))
 
 	team = DomjudgeTeam(cursor.lastrowid, name, display_name)
 	print("Created team for", name, "with ID", team.id)
@@ -208,6 +221,9 @@ def run(db_config, exam_config, students):
 
 	# Get the 'team' role ID.
 	role_id = domjudge_get_role_id(db, "team")
+	
+	# Get the team category ID.
+	team_category_id = domjudge_get_team_category_id(db, exam_config["team_category"])
 
 	for student in students:
 		try:
@@ -239,7 +255,7 @@ def run(db_config, exam_config, students):
 			if domjudge_team == None:
 				# Team doesn't exist.
 				domjudge_team = domjudge_create_team(
-					db, domjudge_username, student.person_code)
+					db, domjudge_username, student.person_code, team_category_id)
 			else:
 				# Team already exists.
 				print("Team", domjudge_team.name, "already exists with ID", domjudge_team.id)
