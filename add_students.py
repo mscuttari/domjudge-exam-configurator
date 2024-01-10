@@ -60,7 +60,7 @@ def gen_random_password(n):
 
 def hash_password(password):
 	bytes = password.encode('utf-8')
-	salt = bcrypt.gensalt("prefix=b"2y"")
+	salt = bcrypt.gensalt(prefix=b"2y")
 	return bcrypt.hashpw(bytes, salt)
 
 def domjudge_get_role_id(db, role):
