@@ -3,6 +3,9 @@
 Install the required OS dependencies.
 The procedure varies according to the package manager in use.
 ```
+python3
+python3-venv
+python3-dev
 libmariadb-dev
 ```
 
