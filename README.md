@@ -1,8 +1,14 @@
 # DOMJudge exam configurator
 ## Usage
+To add the students to an exam:
 ```shell
-python run.py db-config-file exam-config-file students.csv
+python add_students.py db-config-file exam-config-file students.csv
 ```
+To download the solutions submitted by students:
+```shell
+python download_exams.py db-config-file exam-config-file students.csv
+```
+
 ## File formats
 
 - `db-config-file`: path of the JSON file containing the parameters to be used for the connection to the database
