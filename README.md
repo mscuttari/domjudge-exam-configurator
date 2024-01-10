@@ -54,7 +54,7 @@ python download_exams.py db-config-file exam-config-file students.csv
 {
   "shortname": "exam",
   "problem_shortnames": ["Shortname 1", "Shortname 2"],
-  "team_category"; "Team category name"
+  "team_category": "Team category name"
 }
 ```
 
