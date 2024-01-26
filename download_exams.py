@@ -38,7 +38,7 @@ def load_students(file_path):
 				row["Cognome-Nome"],
 				row["E-mail"])
 
-		students.append(student)
+			students.append(student)
 
 	return students
 
@@ -51,7 +51,7 @@ def get_db_connection(db_config):
 		database = db_config["database"])
 
 def compose_domjudge_username(student):
-	return "polimi-" + student.person_code
+	return student.person_code + "-esami"
 
 def domjudge_get_contest_id(db, shortname):
 	cursor = db.cursor()
