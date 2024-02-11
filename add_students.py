@@ -53,7 +53,7 @@ def compose_domjudge_username(student):
 
 def gen_random_password(n):
 	# Define the list of choices of characters.
-	characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	characters = "abcdefghkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
 	# Generate the password.
 	return "".join(random.sample(characters, n))
